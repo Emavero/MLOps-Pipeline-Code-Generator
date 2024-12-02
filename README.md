@@ -52,7 +52,7 @@ Grâce à **Eclipse Ecore** et **Acceleo**, le projet transforme un modèle desc
   - [Télécharger ici](https://www.eclipse.org/downloads/).
 - **Acceleo** : Génération de texte à partir de modèles.
   - Installer via **Eclipse Marketplace**.
-- **Java JDK 11+**
+- **Java JDK 17+**
 - **Python 3.8+** (pour exécuter les scripts générés).
 - **Docker** (pour construire et tester les images).
 - **kubectl** (pour déployer les fichiers YAML générés sur Kubernetes).
