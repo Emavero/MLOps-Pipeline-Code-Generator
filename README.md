@@ -63,7 +63,7 @@ Grâce à **Eclipse Ecore** et **Acceleo**, le projet transforme un modèle desc
 
 1. **Cloner le dépôt :**
    ```bash
-   git clone https://github.com/votre-utilisateur/mlops-code-generator.git
+   git clone https://github.com/Emavero/mlops-code-generator.git
    cd mlops-code-generator
    ```
 
