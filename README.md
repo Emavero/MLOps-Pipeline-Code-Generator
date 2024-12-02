@@ -163,11 +163,6 @@ Les contributions sont les bienvenues ! Suivez ces étapes :
 2. Créez une branche pour vos modifications.
 3. Soumettez une Pull Request avec une description claire.
 
----
-
-## **Licence**
-
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
 ---
 
