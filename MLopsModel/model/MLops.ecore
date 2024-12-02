@@ -4,9 +4,12 @@
   <eClassifiers xsi:type="ecore:EClass" name="Pipeline">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="dataProcessing" eType="#//DataProcessing"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="training" eType="#//Training"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="deployment" eType="#//Deployment"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dataProcessing" eType="#//DataProcessing"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="training" eType="#//Training"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deployment" eType="#//Deployment"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="DataProcessing">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="inputPath" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -14,8 +17,8 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Training">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="algorithm" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-2"
-        eType="#//Parameter"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//Parameter" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Parameter">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

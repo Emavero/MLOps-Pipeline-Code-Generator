@@ -8,9 +8,9 @@
     <genClasses ecoreClass="MLops.ecore#//Pipeline">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MLops.ecore#//Pipeline/name"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MLops.ecore#//Pipeline/version"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MLops.ecore#//Pipeline/dataProcessing"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MLops.ecore#//Pipeline/training"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MLops.ecore#//Pipeline/deployment"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference MLops.ecore#//Pipeline/dataProcessing"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference MLops.ecore#//Pipeline/training"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference MLops.ecore#//Pipeline/deployment"/>
     </genClasses>
     <genClasses ecoreClass="MLops.ecore#//DataProcessing">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MLops.ecore#//DataProcessing/inputPath"/>
@@ -18,7 +18,7 @@
     </genClasses>
     <genClasses ecoreClass="MLops.ecore#//Training">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MLops.ecore#//Training/algorithm"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MLops.ecore#//Training/parameters"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference MLops.ecore#//Training/parameters"/>
     </genClasses>
     <genClasses ecoreClass="MLops.ecore#//Parameter">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MLops.ecore#//Parameter/key"/>
