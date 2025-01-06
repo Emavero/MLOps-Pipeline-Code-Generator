@@ -1,4 +1,3 @@
-
 # **MLOps Pipeline Code Generator**
 
 ## **Description**
@@ -21,181 +20,169 @@ Grâce à une combinaison d’**Eclipse Ecore**, **Acceleo**, **EMF Forms**, et 
 
 ---
 
-## **Fonctionnalités**
+## **1. Prétraitement des Données**
 
-1. **Interfaces graphiques interactives** :  
-   - Interfaces basées sur **EMF Forms** pour chaque étape (prétraitement, entraînement, etc.), accessibles via une application **SWT**.  
-   - Simplifie la création et la gestion des pipelines sans nécessiter de connaissances approfondies en modélisation Ecore.  
+### **Diagramme UML du Métamodèle**
+![Diagramme UML du Métamodèle PreProcess](./Diagrams/PreProcess_Diagram.png)  
 
-2. **Méta-modélisation avancée** :  
-   - **Prétraitement** : Définit les étapes de nettoyage, normalisation et transformation des données.  
-   - **Modèle** : Permet de configurer les types de modèles, algorithmes et hyperparamètres.  
-   - **Entraînement** : Capture les détails des données d’entraînement, métriques et stratégies d’apprentissage.  
-   - **Évaluation** : Spécifie les métriques et techniques de validation croisée.  
-   - **Dockerisation** : Gènère des Dockerfiles basés sur les besoins du pipeline.  
-   - **Déploiement** : Crée des fichiers YAML pour orchestrer les services sur Kubernetes.  
+### **Interface Utilisateur**
+L'interface permet de configurer facilement les étapes de nettoyage et de transformation des données :  
+![Interface PreProcess](./Interfaces/PreProcess_Interface.png)  
 
-3. **Génération d’artefacts automatisée** :  
-   - Production d'artefacts à partir des modèles définis via **Acceleo**.  
-   - Réduction des erreurs manuelles grâce à la génération basée sur des métamodèles bien définis.  
-
-4. **Exécution et déploiement faciles** :  
-   - Scripts et configurations prêtes à l'emploi pour l’entraînement, la dockerisation et le déploiement sur Kubernetes.  
-
----
-
-## **Technologies Utilisées**
-
-- **Eclipse Modeling Framework (EMF)** : Pour la définition des métamodèles et des instances modèles.  
-- **Acceleo** : Génération d'artefacts à partir de modèles.  
-- **EMF Forms + SWT** : Interfaces graphiques conviviales pour interagir avec les modèles.  
-- **Python** : Scripts pour les étapes de traitement, entraînement et évaluation.  
-- **Docker et Kubernetes** : Pour la conteneurisation et l'orchestration.  
-
----
-
-## **Structure du Projet**
-
+### **Exemple d'Instance (`PreProcess.xmi`)**
+```xml
+<preProcess name="DataPreprocessingPipeline" version="1.0">
+  <inputPath>/data/raw</inputPath>
+  <outputPath>/data/processed</outputPath>
+  <steps>
+    <step operation="normalize" target="features"/>
+    <step operation="removeNulls" target="rows"/>
+  </steps>
+</preProcess>
 ```
-.
-├── MLopsModel/               # Projet contenant le métamodèle Ecore et les instances.
-│   ├── MLops.ecore           # Métamodèle Ecore décrivant le pipeline MLOps.
-│   ├── pipeline_example.xmi  # Exemple d'instance de pipeline.
-│
-├── MLopsCodeGen/             # Projet contenant les templates Acceleo.
-│   ├── PipelineCodeGen.mtl   # Templates de génération des artefacts.
-│
-├── MLopsGenerated/           # Projet contenant les artefacts générés.
-│   ├── ExamplePipeline_train.py
-│   ├── ExamplePipeline_Dockerfile
-│   ├── ExamplePipeline_deployment.yaml
-│
-├── README.md                 # Documentation du projet.
-└── LICENSE                   # Licence du projet.
+
+### **Artefact Généré (`data_processing.py`)**
+```python
+import pandas as pd
+
+# Example preprocessing script
+print("Starting preprocessing...")
+data = pd.read_csv('/data/raw/data.csv')
+
+# Apply steps
+data = data.dropna()  # Remove nulls
+data = (data - data.min()) / (data.max() - data.min())  # Normalize
+
+data.to_csv('/data/processed/data.csv', index=False)
+print("Preprocessing complete. Processed data saved to /data/processed.")
 ```
 
 ---
 
-## **Pré-requis**
+## **2. Définition du Modèle**
 
-- **Eclipse IDE for Java and DSL Developers**
-  - [Télécharger ici](https://www.eclipse.org/downloads/).
-- **Acceleo** : Génération de texte à partir de modèles.
-  - Installer via **Eclipse Marketplace**.
-- **Java JDK 17+**
-- **Python 3.8+** (pour exécuter les scripts générés).
-- **Docker** (pour construire et tester les images).
-- **kubectl** (pour déployer les fichiers YAML générés sur Kubernetes).
+### **Diagramme UML du Métamodèle**
+![Diagramme UML du Métamodèle Model](./Diagrams/Model_Diagram.png)  
 
----
+### **Interface Utilisateur**
+L'interface permet de choisir un type de modèle, un algorithme et de configurer les hyperparamètres :  
+![Interface Model](./Interfaces/Model_Interface.png)  
 
-## **Installation**
-
-1. **Cloner le dépôt :**
-   ```bash
-   git clone https://github.com/Emavero/mlops-code-generator.git
-   cd mlops-code-generator
-   ```
-
-2. **Configurer Eclipse :**
-   - Importez les projets `MLopsModel`, `MLopsCodeGen` et `MLopsGenerated` dans votre workspace Eclipse.
-   - Vérifiez que les dépendances du métamodèle sont bien configurées dans Acceleo.
-
----
-
-## **Utilisation**
-
-### **Étape 1 : Modélisation**
-1. Ouvrez le fichier `MLops.ecore` pour comprendre la structure du pipeline.
-2. Créez une instance `.xmi` (ou utilisez `pipeline_example.xmi`) pour définir les détails de votre pipeline :
-   - Exemple :
-     ```xml
-     <pipeline name="ExamplePipeline" version="1.0">
-       <dataProcessing inputPath="/data/input" outputPath="/data/output"/>
-       <training algorithm="RandomForest">
-         <parameters key="n_estimators" value="100"/>
-       </training>
-       <deployment targetPlatform="Docker" scalability="3"/>
-     </pipeline>
-     ```
-
-### **Étape 2 : Génération d'artefacts**
-1. **Lancer la génération avec Acceleo** :
-   - Clic droit sur `PipelineCodeGen.mtl` > **Run As > Launch Acceleo Application**.
-2. **Sélectionner le modèle** :
-   - Choisissez `pipeline_example.xmi` comme fichier d'entrée.
-3. **Résultats** :
-   - Les artefacts générés (scripts, Dockerfiles, fichiers YAML) sont placés dans `MLopsGenerated/`.
-
-### **Étape 3 : Tester les artefacts**
-1. **Tester le script d'entraînement :**
-   ```bash
-   python MLopsGenerated/ExamplePipeline_train.py
-   ```
-2. **Construire l'image Docker :**
-   ```bash
-   docker build -t example_pipeline -f MLopsGenerated/ExamplePipeline_Dockerfile .
-   ```
-3. **Déployer sur Kubernetes :**
-   ```bash
-   kubectl apply -f MLopsGenerated/ExamplePipeline_deployment.yaml
-   ```
-
----
-
-## **Exemple de Résultat**
-
-### Dockerfile :
-```dockerfile
-FROM python:3.9-slim
-
-RUN pip install sklearn
-
-COPY /data/input /app/data
-COPY train.py /app/
-
-WORKDIR /app
-
-CMD ["python", "train.py"]
+### **Exemple d'Instance (`Model.xmi`)**
+```xml
+<model name="RandomForestModel" type="classification">
+  <algorithm>RandomForest</algorithm>
+  <parameters>
+    <parameter key="n_estimators" value="100"/>
+    <parameter key="max_depth" value="10"/>
+  </parameters>
+</model>
 ```
 
-### Script d'entraînement :
+### **Artefact Généré (`model_definition.py`)**
 ```python
 from sklearn.ensemble import RandomForestClassifier
 
-# Parameters
-params = {
-    'n_estimators': 100,
-}
-
-# Example of training script
-print(f"Training data from /data/input with params {params}")
-# Add actual training logic here
-
-print(f"Model saved to /data/output")
+# Define model
+model = RandomForestClassifier(n_estimators=100, max_depth=10)
+print("RandomForest model defined with hyperparameters: n_estimators=100, max_depth=10")
 ```
 
 ---
 
-## **Personnalisation**
+## **3. Entraînement**
 
-- **Ajouter de nouveaux artefacts :**
-  - Modifiez ou ajoutez des templates dans `PipelineCodeGen.mtl`.
-- **Étendre le métamodèle :**
-  - Ajoutez de nouvelles EClasses ou attributs dans `MLops.ecore`.
+### **Diagramme UML du Métamodèle**
+![Diagramme UML du Métamodèle Training](./Diagrams/Training_Diagram.png)  
+
+### **Interface Utilisateur**
+Configurez les données d'entraînement, les métriques et les callbacks :  
+![Interface Training](./Interfaces/Training_Interface.png)  
+
+### **Exemple d'Instance (`Training.xmi`)**
+```xml
+<training name="TrainingPipeline" datasetPath="/data/processed/data.csv">
+  <modelRef>RandomForestModel</modelRef>
+  <metrics>accuracy</metrics>
+</training>
+```
+
+### **Artefact Généré (`training.py`)**
+```python
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score
+
+# Load data
+print("Loading data...")
+data = pd.read_csv('/data/processed/data.csv')
+
+# Example training logic
+X, y = data.iloc[:, :-1], data.iloc[:, -1]
+model = RandomForestClassifier(n_estimators=100, max_depth=10)
+model.fit(X, y)
+
+print("Training complete. Model accuracy: ", accuracy_score(y, model.predict(X)))
+```
 
 ---
 
-## **Contributions**
+## **4. Évaluation**
 
-Les contributions sont les bienvenues ! Suivez ces étapes :
-1. Forkez le dépôt.
-2. Créez une branche pour vos modifications.
-3. Soumettez une Pull Request avec une description claire.
+### **Diagramme UML du Métamodèle**
+![Diagramme UML du Métamodèle Evaluate](./Diagrams/Evaluate_Diagram.png)  
 
+### **Interface Utilisateur**
+Configurez les métriques d’évaluation :  
+![Interface Evaluate](./Interfaces/Evaluate_Interface.png)  
+
+### **Exemple d'Instance (`Evaluate.xmi`)**
+```xml
+<evaluation name="EvaluationPipeline">
+  <metrics>f1_score, recall</metrics>
+</evaluation>
+```
+
+### **Artefact Généré (`evaluation.py`)**
+```python
+from sklearn.metrics import f1_score, recall_score
+
+# Evaluate model
+print("Evaluating model...")
+# Add evaluation logic here
+```
 
 ---
 
-## **À Propos**
+## **5. Dockerisation**
 
-Ce projet a été développé pour démontrer l’utilisation de l’ingénierie dirigée par les modèles (MDE) dans le domaine du MLOps, en automatisant la génération d’artefacts essentiels pour des pipelines reproductibles et déployables.
+### **Diagramme UML du Métamodèle**
+![Diagramme UML du Métamodèle Docker](./Diagrams/Docker_Diagram.png)  
+
+### **Interface Utilisateur**
+Configurez les bases et dépendances pour Docker :  
+![Interface Docker](./Interfaces/Docker_Interface.png)  
+
+### **Exemple d'Instance (`Docker.xmi`)**
+```xml
+<docker name="DockerPipeline">
+  <baseImage>python:3.8-slim</baseImage>
+  <dependencies>scikit-learn</dependencies>
+</docker>
+```
+
+### **Artefact Généré (`Dockerfile`)**
+```dockerfile
+FROM python:3.8-slim
+
+RUN pip install scikit-learn
+
+COPY /data /app/data
+COPY training.py /app/
+
+WORKDIR /app
+
+CMD ["python", "training.py"]
+```
+
+---
+
