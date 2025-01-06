@@ -1,26 +1,56 @@
 
 # **MLOps Pipeline Code Generator**
 
-
 ## **Description**
 
-Ce projet utilise l'**Ingénierie Dirigée par les Modèles (Model-Driven Engineering, MDE)** pour automatiser la génération d'artefacts nécessaires à un pipeline MLOps, tels que :
-- Scripts d'entraînement (`train.py`),
-- Fichiers Docker (`Dockerfile`),
-- Configurations de déploiement (`deployment.yaml`).
+Le **MLOps Pipeline Code Generator** est un outil innovant qui exploite l'**Ingénierie Dirigée par les Modèles (MDE)** pour automatiser la génération des artefacts nécessaires à la mise en place d'un pipeline MLOps. Conçu pour maximiser l'efficacité et la reproductibilité, ce projet repose sur plusieurs métamodèles spécifiques pour couvrir toutes les étapes clés d'un pipeline MLOps :
 
-Grâce à **Eclipse Ecore** et **Acceleo**, le projet transforme un modèle descriptif (conforme au métamodèle `MLops.ecore`) en fichiers prêts à l'emploi pour simplifier les étapes du cycle DevOps/MLOps.
+1. **Prétraitement des données**  
+2. **Définition du modèle**  
+3. **Entraînement**  
+4. **Évaluation**  
+5. **Conteneurisation (Docker)**  
+6. **Déploiement (Kubernetes)**  
+
+### **Points Clés**
+- **Génération Automatique** : Gènère des scripts Python (`train.py`, `evaluate.py`), des fichiers Docker (`Dockerfile`), et des configurations Kubernetes (`deployment.yaml`) à partir de modèles définis.  
+- **Interfaces Intuitives** : Remplace la création manuelle d’instances `.xmi` par des interfaces graphiques interactives basées sur **EMF Forms** et intégrées dans une application **SWT**.  
+- **Extensibilité** : Permet d'étendre facilement les métamodèles et les artefacts générés pour répondre aux besoins spécifiques des utilisateurs.  
+
+Grâce à une combinaison d’**Eclipse Ecore**, **Acceleo**, **EMF Forms**, et une application **SWT**, ce projet est une solution puissante et modulaire pour gérer des pipelines MLOps de bout en bout.
 
 ---
 
 ## **Fonctionnalités**
 
-- **Modélisation de pipeline MLOps** : Définissez un pipeline en utilisant un fichier `.xmi` basé sur le métamodèle Ecore.
-- **Génération automatisée d'artefacts** : 
-  - Dockerfiles pour la conteneurisation.
-  - Scripts Python pour l'entraînement des modèles.
-  - Fichiers YAML pour le déploiement Kubernetes.
-- **Flexibilité et extensibilité** : Adaptez ou étendez facilement les templates pour répondre à vos besoins.
+1. **Interfaces graphiques interactives** :  
+   - Interfaces basées sur **EMF Forms** pour chaque étape (prétraitement, entraînement, etc.), accessibles via une application **SWT**.  
+   - Simplifie la création et la gestion des pipelines sans nécessiter de connaissances approfondies en modélisation Ecore.  
+
+2. **Méta-modélisation avancée** :  
+   - **Prétraitement** : Définit les étapes de nettoyage, normalisation et transformation des données.  
+   - **Modèle** : Permet de configurer les types de modèles, algorithmes et hyperparamètres.  
+   - **Entraînement** : Capture les détails des données d’entraînement, métriques et stratégies d’apprentissage.  
+   - **Évaluation** : Spécifie les métriques et techniques de validation croisée.  
+   - **Dockerisation** : Gènère des Dockerfiles basés sur les besoins du pipeline.  
+   - **Déploiement** : Crée des fichiers YAML pour orchestrer les services sur Kubernetes.  
+
+3. **Génération d’artefacts automatisée** :  
+   - Production d'artefacts à partir des modèles définis via **Acceleo**.  
+   - Réduction des erreurs manuelles grâce à la génération basée sur des métamodèles bien définis.  
+
+4. **Exécution et déploiement faciles** :  
+   - Scripts et configurations prêtes à l'emploi pour l’entraînement, la dockerisation et le déploiement sur Kubernetes.  
+
+---
+
+## **Technologies Utilisées**
+
+- **Eclipse Modeling Framework (EMF)** : Pour la définition des métamodèles et des instances modèles.  
+- **Acceleo** : Génération d'artefacts à partir de modèles.  
+- **EMF Forms + SWT** : Interfaces graphiques conviviales pour interagir avec les modèles.  
+- **Python** : Scripts pour les étapes de traitement, entraînement et évaluation.  
+- **Docker et Kubernetes** : Pour la conteneurisation et l'orchestration.  
 
 ---
 
