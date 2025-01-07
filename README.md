@@ -366,7 +366,7 @@ Il est dans le dossier MlopsGenerated/
 
 ---
 
-## **5. Kubernetes**
+## **6. Kubernetes**
 
 ### **Diagramme UML du Métamodèle**
 ![Diagramme UML du Métamodèle Docker](./Diagrams/Docker_Diagram.png)  
