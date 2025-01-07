@@ -372,9 +372,9 @@ Il est dans le dossier MlopsGenerated/
 Configurez les bases et dépendances pour Docker :  
 ![Interface Docker](./Interfaces/Docker_Interface.png)  
 
-### **Exemple d'Instance (`Docker.xmi`)**
-Il est dans le dossier Docker/model/
-### **Artefact Généré (`Dockerfile`)**
+### **Exemple d'Instance (`Kubernetes.xmi`)**
+Il est dans le dossier Kubernetes/model/
+### **Artefact Généré (`deploy.yaml`)**
 
 Il est dans le dossier MlopsGenerated/
 
