@@ -20,6 +20,9 @@ Grâce à une combinaison d’**Eclipse Ecore**, **Acceleo**, **EMF Forms**, et 
 
 ---
 
+## ** Workflow**
+![Diagramme UML du Métamodèle Docker](./Diagrams/Docker_Diagram.png)  
+
 ## **1. Prétraitement des Données**
 
 ### **Diagramme UML du Métamodèle**
