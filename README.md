@@ -254,7 +254,7 @@ L'interface permet de choisir un type de modèle, un algorithme et de configurer
 
 ```
 
-### **Artefact Généré (`model_definition.py`)**
+### **Artefact Généré (`model.py`)**
 ```python
 
 import tensorflow as tf
